@@ -1,0 +1,5 @@
+<launch>
+  <node name="socketcan_bridge" pkg="socketcan_bridge" type="socketcan_bridge_node" output="screen">
+      <rosparam file="$(find chassis_base)/config/socketcan_bridge_params.yaml" command="load" />
+  </node> 
+</launch>

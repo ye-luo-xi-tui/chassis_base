@@ -1,0 +1,9 @@
+controllers:
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50
+  
+  joint_velocity_controller:
+    type: velocity_controllers/JointVelocityController
+    joint: "front_left_joint"
+    required_drive_mode: 3

@@ -1,0 +1,8 @@
+<launch>
+    <rosparam command="load" file="$(find chassis_base)/config/controller.yaml" />
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+          output="screen" args="
+        controllers/joint_state_controller
+        controllers/chassis_base_controller
+"/>
+</launch>
