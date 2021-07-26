@@ -17,57 +17,69 @@ defaults:
   motor_allocator: canopen::Motor402::Allocator # select allocator for motor layer
   motor_layer: # settings passed to motor layer (plugin-specific)
     switching_state: 5 # (Operation_Enable), state for mode switching
-  pos_to_device: "-rint(pos/(2*pi)*4096)"
-  pos_from_device: "-obj6064*(2*pi)/4096"
-  vel_to_device: "-rint(vel/(2*pi)*40960)"
-  vel_from_device: "-obj606C*(2*pi)/40960"
   eff_to_device: "-rint(eff/10)" # just round to integer
   eff_from_device: "0" # unset
   dcf_overlay:
 #    #RPDO1
-#    "1400sub2" : "0xfe"
-#    "1600sub1" : "0x60400010" #control word
-#    "1600sub0" : "1"          #Map amount
-#    #RPDO2
-#    "1401sub2" : "0xfe"
-#    "1601sub1" : "0x60600008" #Write mode
-#    "1601sub0" : "1"
-#    #RPDO3
-#    "1402sub2" : "0xfe"
-#    "1602sub1" : "0x607a0020" #Write position
-#    "1602sub0" : "1"          #Map amount
-#    #RPDO4
-#    "1403sub2" : "0xfe"
-#    "1603sub1" : "0x60ff0020" #Write velocity
-#    "1603sub0" : "1"
-#    #TPDO1
-#    "1800sub2" : "0xfe"
-#    "1a00sub1" : "0x60410010"
-#    "1a00sub0" : "1"
-#    #TPDO2
-#    "1801sub2" : "0xfe"
-#    "1a01sub1" : "0x60610008"
-#    "1a01sub0" : "1"
-#    #TPDO3
-#    "1802sub2" : "0x01"
-#    "1a02sub1" : "0x60630020"
-#    "1a02sub0" : "1"
-#    #TPDO4
-#    "1803sub2" : "0x01"
-#    "1a03sub1" : "0x606c0020"
-#    "1a03sub0" : "1"
-    "6098" : "0"
-    "1017" : "100" #Producer heartbeat time
+    #    "1400sub2" : "0xfe"
+    #    "1600sub1" : "0x60400010" #control word
+    #    "1600sub0" : "1"          #Map amount
+    #    #RPDO2
+    #    "1401sub2" : "0xfe"
+    #    "1601sub1" : "0x60600008" #Write mode
+    #    "1601sub0" : "1"
+    #    #RPDO3
+    #    "1402sub2" : "0xfe"
+    #    "1602sub1" : "0x607a0020" #Write position
+    #    "1602sub0" : "1"          #Map amount
+    #    #RPDO4
+    #    "1403sub2" : "0xfe"
+    #    "1603sub1" : "0x60ff0020" #Write velocity
+    #    "1603sub0" : "1"
+    #    #TPDO1
+    #    "1800sub2" : "0xfe"
+    #    "1a00sub1" : "0x60410010"
+    #    "1a00sub0" : "1"
+    #    #TPDO2
+    #    "1801sub2" : "0xfe"
+    #    "1a01sub1" : "0x60610008"
+    #    "1a01sub0" : "1"
+    #    #TPDO3
+    #    "1802sub2" : "0x01"
+    #    "1a02sub1" : "0x60630020"
+    #    "1a02sub0" : "1"
+    #    #TPDO4
+    #    "1803sub2" : "0x01"
+    #    "1a03sub1" : "0x606c0020"
+    #    "1a03sub0" : "1"
+    "6098": "0"
+    "1017": "100" #Producer heartbeat time
 
-    
+
 nodes:
   front_left_joint:
     id: 1
+    pos_to_device: "-rint(pos/(2*pi)*4096)"
+    pos_from_device: "-obj6064*(2*pi)/4096"
+    vel_to_device: "-rint(vel/(2*pi)*40960)"
+    vel_from_device: "-obj606C*(2*pi)/40960"
   front_right_joint:
     id: 2
+    pos_to_device: "rint(pos/(2*pi)*4096)"
+    pos_from_device: "obj6064*(2*pi)/4096"
+    vel_to_device: "rint(vel/(2*pi)*40960)"
+    vel_from_device: "obj606C*(2*pi)/40960"
   back_left_joint:
     id: 3
+    pos_to_device: "-rint(pos/(2*pi)*4096)"
+    pos_from_device: "-obj6064*(2*pi)/4096"
+    vel_to_device: "-rint(vel/(2*pi)*40960)"
+    vel_from_device: "-obj606C*(2*pi)/40960"
   back_right_joint:
     id: 4
+    pos_to_device: "rint(pos/(2*pi)*4096)"
+    pos_from_device: "obj6064*(2*pi)/4096"
+    vel_to_device: "rint(vel/(2*pi)*40960)"
+    vel_from_device: "obj606C*(2*pi)/40960"
 # list syntax
 
