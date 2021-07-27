@@ -1,10 +1,13 @@
 <launch>
+    <!--load param-->
     <rosparam command="load" file="$(find chassis_base)/config/joy_teleop.yaml"/>
     <!-- joy node -->
     <node respawn="true" pkg="joy"
           type="joy_node" name="joy_node">
     </node>
+    <!--cmd_transfer node-->
+    <node pkg="chassis_base" type="cmd_transfer" name="cmd_transfer_node"/>
 
-    <node pkg="joy_teleop" type="joy_teleop.py" name="joy_teleop"/>
+    <node pkg="joy_teleop" type="joy_teleop.py" name="joy_teleop_node"/>
 
 </launch>
