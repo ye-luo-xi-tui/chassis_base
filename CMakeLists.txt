@@ -3,17 +3,15 @@ project(chassis_base)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
-set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-        roscpp
-        roslint
-        sensor_msgs
-        geometry_msgs
-        )
+  roscpp
+  sensor_msgs
+  geometry_msgs
+)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -111,9 +109,6 @@ catkin_package(
         chassis_base
         CATKIN_DEPENDS
         roscpp
-        roslint
-        sensor_msgs
-        geometry_msgs
         #  DEPENDS system_lib
 )
 
@@ -141,8 +136,8 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-add_executable(cmd_transfer src/cmd_transfer.cpp src/cmd_transfer_node.cpp)
-add_executable(lamp_node src/gpio_manager.cpp src/Lamp_node.cpp)
+add_executable(cmd_transfer src/cmd_transfer.cpp src/main.cpp)
+
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
 ## target back to the shorter version for ease of user use
@@ -158,9 +153,6 @@ target_link_libraries(cmd_transfer
         ${catkin_LIBRARIES}
         )
 
-target_link_libraries(lamp_node
-        ${catkin_LIBRARIES}
-        )
 #############
 ## Install ##
 #############
@@ -215,4 +207,3 @@ target_link_libraries(lamp_node
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
-roslint_cpp()
