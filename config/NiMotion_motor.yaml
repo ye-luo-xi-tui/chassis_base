@@ -50,8 +50,8 @@ defaults:
 nodes:
   front_right_joint:
     id: 1
-    pos_to_device: "rint(pos/(2*pi)*10000)"
-    pos_from_device: "obj6064*(2*pi)/10000"
+    pos_to_device: "rint(pos/(2*pi)*5000)"
+    pos_from_device: "obj6064*pi/5000"
     vel_to_device: "rint(vel/pi*5000)"
     vel_from_device: "obj6069*pi/5000"
   front_left_joint:
