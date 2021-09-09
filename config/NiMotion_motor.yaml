@@ -13,7 +13,7 @@ sync:
 # struct syntax
 defaults:
   eds_pkg: chassis_base # optionals package  name for relative path
-  eds_file: "config/PMM6040.eds" # path to EDS/DCF file
+  eds_file: "config/NiMotion_stm57.eds" # path to EDS/DCF file
   motor_allocator: canopen::Motor402::Allocator # select allocator for motor layer
   motor_layer: # settings passed to motor layer (plugin-specific)
     switching_state: 5 # (Operation_Enable), state for mode switching
@@ -32,44 +32,28 @@ defaults:
     "1403sub2": "0xfe"
     "1603sub0": "1"
     "1603sub1": "0x60ff0020"
-    "1800sub2": "0xfe"
+    "1800sub2": "0x01"
     "1a00sub0": "1"
     "1a00sub1": "0x60410010"
-    "1801sub2": "0xfe"
+    "1801sub2": "0x01"
     "1a01sub0": "1"
     "1a01sub1": "0x60610008"
-    "1802sub2": "0xfe"
+    "1802sub2": "0x01"
     "1a02sub0": "1"
     "1a02sub1": "0x60630020"
-    "1803sub2": "0xfe"
+    "1803sub2": "0x01"
     "1a03sub0": "1"
     "1a03sub1": "0x606c0020"
     "1017": "100" #Producer heartbeat time
     "2002sub1": "0"
+    "2003sub3": "33"
+    "2003sub4": "0"
     "6060": "3"
 nodes:
-  front_right_joint:
-    id: 1
-    pos_to_device: "rint(pos/(2*pi)*10000)"
-    pos_from_device: "obj6064*(2*pi)/10000"
-    vel_to_device: "rint(vel/pi*5000)"
-    vel_from_device: "obj6069*pi/5000"
   front_left_joint:
-    id: 2
-    pos_to_device: "-rint(pos/(2*pi)*10000)"
-    pos_from_device: "-obj6064*(2*pi)/10000"
-    vel_to_device: "-rint(vel/pi*5000)"
-    vel_from_device: "-obj6069*pi/5000"
-  back_left_joint:
-    id: 3
-    pos_to_device: "-rint(pos/(2*pi)*10000)"
-    pos_from_device: "-obj6064*(2*pi)/10000"
-    vel_to_device: "-rint(vel/pi*5000)"
-    vel_from_device: "-obj6069*pi/5000"
-  back_right_joint:
-    id: 4
-    pos_to_device: "rint(pos/(2*pi)*10000)"
-    pos_from_device: "obj6064*(2*pi)/10000"
-    vel_to_device: "rint(vel/pi*5000)"
-    vel_from_device: "obj6069*pi/5000"
+    id: 1
+    pos_to_device: "-rint(pos/(2*pi)*4096)"
+    pos_from_device: "-obj6064*(2*pi)/4096"
+    vel_to_device: "-rint(vel/pi*30)"
+    vel_from_device: "-obj606C*pi/30"
 # list syntax
