@@ -1,0 +1,59 @@
+bus:
+  device: can0 # socketcan network
+  loopback: false # socket should loop back messages
+  driver_plugin: can::SocketCANInterface
+  master_allocator: canopen::SimpleMaster::Allocator
+sync:
+  interval_ms: 20 # set to 0 to disable sync
+  # update_ms: <interval_ms> #update interval of control loop, must be set explecitly if sync is disabled
+  overflow: 0 # overflow sync counter at value or do not set it (0, default)
+  #heartbeat: # simple heartbeat producer, optional!
+  # rate: 20 # heartbeat rate
+  #msg: "77f#05" # message to send, cansend format: heartbeat of node 127 with status 5=Started
+# struct syntax
+defaults:
+  eds_pkg: chassis_base # optionals package  name for relative path
+  eds_file: "config/NiMotion_stm57.eds" # path to EDS/DCF file
+  motor_allocator: canopen::Motor402::Allocator # select allocator for motor layer
+  motor_layer: # settings passed to motor layer (plugin-specific)
+    switching_state: 5 # (Operation_Enable), state for mode switching
+  eff_to_device: "-rint(eff/10)" # just round to integer
+  eff_from_device: "0" # unset
+  dcf_overlay:
+    "1400sub2": "0xfe"
+    "1600sub0": "1"
+    "1600sub1": "0x60400010"
+    "1401sub2": "0xfe"
+    "1601sub0": "1"
+    "1601sub1": "0x60600008"
+    "1402sub2": "0xfe"
+    "1602sub0": "1"
+    "1602sub1": "0x607a0020"
+    "1403sub2": "0xfe"
+    "1603sub0": "1"
+    "1603sub1": "0x60ff0020"
+    "1800sub2": "0x01"
+    "1a00sub0": "1"
+    "1a00sub1": "0x60410010"
+    "1801sub2": "0x01"
+    "1a01sub0": "1"
+    "1a01sub1": "0x60610008"
+    "1802sub2": "0x01"
+    "1a02sub0": "1"
+    "1a02sub1": "0x60630020"
+    "1803sub2": "0x01"
+    "1a03sub0": "1"
+    "1a03sub1": "0x606c0020"
+    "1017": "100" #Producer heartbeat time
+    "2002sub1": "0"
+    "2003sub3": "33"
+    "2003sub4": "0"
+    "6060": "3"
+nodes:
+  front_left_joint:
+    id: 1
+    pos_to_device: "-rint(pos/(2*pi)*4096)"
+    pos_from_device: "-obj6064*(2*pi)/4096"
+    vel_to_device: "-rint(vel/pi*30)"
+    vel_from_device: "-obj606C*pi/30"
+# list syntax
