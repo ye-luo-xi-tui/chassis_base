@@ -1,18 +1,22 @@
+start_button: 0
+stop_button: 1
+auto_button: 2
+stick_button: 3
 controllers:
 
   joint_state_controller:
     type: joint_state_controller/JointStateController
-    publish_rate: 50
+    publish_rate: 100
 
   chassis_base_controller:
     type: diff_drive_controller/DiffDriveController
-    left_wheel: ['front_left_joint', 'back_left_joint']
-    right_wheel: ['front_right_joint', 'back_right_joint']
-    publish: 50
+    left_wheel: [ 'front_left_joint', 'back_left_joint' ]
+    right_wheel: [ 'front_right_joint', 'back_right_joint' ]
+    publish: 100
     pose_covariance_diagonal: [ 0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 0.001 ]
     twist_covariance_diagonal: [ 0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 0.001 ]
-    enable_odom_tf: false
-    cmd_vel_timeout: 2.0
+    enable_odom_tf: true
+    cmd_vel_timeout: 0.25
     required_drive_mode: 3
     wheel_separation_multiplier: 1.0
     wheel_radius_multiplier: 1.0
