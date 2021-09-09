@@ -1,8 +1,15 @@
 <launch>
-    <rosparam command="load" file="$(find chassis_base)/config/controller.yaml" />
+    <rosparam command="load" file="$(find chassis_base)/config/controller.yaml"/>
     <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
           output="screen" args="
         controllers/joint_state_controller
         controllers/chassis_base_controller
 "/>
+    <!--cmd_transfer node-->
+    <node pkg="chassis_base" type="cmd_transfer" name="cmd_transfer_node">
+        <remap from="joy_cmd_vel" to="joy_cmd_vel"/>
+        <remap from="computer_cmd_vel" to="computer_cmd_vel"/>
+    </node>
+
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"/>
 </launch>

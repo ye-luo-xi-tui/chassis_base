@@ -1,0 +1,4 @@
+<launch>
+    <include file="$(find chassis_base)/launch/Hub_Motor_base.launch"/>
+    <include file="$(find chassis_base)/launch/controller.launch"/>
+</launch>

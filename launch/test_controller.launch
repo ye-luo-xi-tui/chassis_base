@@ -1,0 +1,12 @@
+<launch>
+    <rosparam command="load" file="$(find chassis_base)/config/test_controller.yaml"/>
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+          output="screen" args="
+        controllers/joint_state_controller
+        controllers/joint_velocity_controller
+"/>
+    <!--cmd_transfer node-->
+    <node pkg="chassis_base" type="cmd_transfer" name="cmd_transfer_node"/>
+
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"/>
+</launch>
