@@ -10,21 +10,21 @@
 #include <map>
 #include <poll.h>
 
-class GpioMangager{
-  public:
-    explicit  GpioMangager();
-    ~GpioMangager();
-    void addInIo(int pin);
-    void addOutIo(int pin);
-    void writeOutput(int pin, bool IS_HIGH);
-    void readInput();
+class GpioMangager {
+public:
+  explicit GpioMangager();
+  ~GpioMangager();
+  void addInIo(int pin);
+  void addOutIo(int pin);
+  void writeOutput(int pin, bool IS_HIGH);
+  void readInput();
 
-  private:
-  void ioExport(int pin);
-  void ioUnExport(int pin);
-  void ioDirectionSet(int pin, bool IS_OUT);
+private:
+  void ioExport(std::string pin);
+  void ioUnExport(std::string pin);
+  void ioDirectionSet(std::string pin, bool IS_OUT);
   std::map<int, int> mapOutputIo_;
-  std::map<int, int> mapInputIo_;
+  std::map<int, std::map<int, int *>> mapInputIo_;
   std::string pin_;
   struct pollfd fds[20]{};
 };
