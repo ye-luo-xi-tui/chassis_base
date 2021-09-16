@@ -46,8 +46,6 @@ defaults:
     "1a03sub1": "0x606c0020"
     "1017": "100" #Producer heartbeat time
     "2002sub1": "0"
-    "2003sub3": "33"
-    "2003sub4": "0"
     "6060": "3"
 nodes:
   front_left_joint:
