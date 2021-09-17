@@ -32,16 +32,16 @@ defaults:
     "1403sub2": "0xfe"
     "1603sub0": "1"
     "1603sub1": "0x60ff0020"
-    "1800sub2": "0x01"
+    "1800sub2": "0xfe"
     "1a00sub0": "1"
     "1a00sub1": "0x60410010"
-    "1801sub2": "0x01"
+    "1801sub2": "0xfe"
     "1a01sub0": "1"
     "1a01sub1": "0x60610008"
-    "1802sub2": "0x01"
+    "1802sub2": "0xfe"
     "1a02sub0": "1"
     "1a02sub1": "0x60630020"
-    "1803sub2": "0x01"
+    "1803sub2": "0xfe"
     "1a03sub0": "1"
     "1a03sub1": "0x606c0020"
     "1017": "100" #Producer heartbeat time
@@ -50,8 +50,8 @@ defaults:
 nodes:
   front_left_joint:
     id: 1
-    pos_to_device: "-rint(pos/(2*pi)*4096)"
-    pos_from_device: "-obj6064*(2*pi)/4096"
-    vel_to_device: "-rint(vel/pi*30)"
+    pos_to_device: "-rint(pos/(2*pi)*4000)"
+    pos_from_device: "-obj6063*(2*pi)/4000"
+    vel_to_device: "-rint(vel/pi*2000)"
     vel_from_device: "-obj606C*pi/30"
 # list syntax
