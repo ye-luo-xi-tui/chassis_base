@@ -8,7 +8,10 @@
 int main(int argc, char **argv) {
   ros::init(argc, argv, "Lamp_node");
   ros::NodeHandle nh;
-
-  while (ros::ok())
-    return 0;
+  GpioMangager gpio_mangager;
+  gpio_mangager.addOutIo(248);
+  gpio_mangager.addOutIo(249);
+  gpio_mangager.writeOutput(248, true);
+  while (ros::ok()) {
+  }
 }
