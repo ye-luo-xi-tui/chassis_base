@@ -53,7 +53,7 @@ void GpioMangager::addOutIo(int pin) {
   ioExport(pin_);
   ioDirectionSet(pin_, true);
 
-  std::string file = "/sys/class/gpio/gpio" + pin_ + "value";
+  std::string file = "/sys/class/gpio/gpio" + pin_ + "/value";
   fd = open(file.data(), O_WRONLY);
   if (fd == -1) {
     ROS_ERROR("[gpio]Unable to open /sys/class/gpio/gpio%i/value", pin);
