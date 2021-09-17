@@ -3,15 +3,17 @@ project(chassis_base)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
-
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  roscpp
-  sensor_msgs
-  geometry_msgs
-)
+        roscpp
+        roslint
+        sensor_msgs
+        geometry_msgs
+        )
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -109,6 +111,9 @@ catkin_package(
         chassis_base
         CATKIN_DEPENDS
         roscpp
+        roslint
+        sensor_msgs
+        geometry_msgs
         #  DEPENDS system_lib
 )
 
@@ -153,6 +158,9 @@ target_link_libraries(cmd_transfer
         ${catkin_LIBRARIES}
         )
 
+target_link_libraries(lamp_node
+        ${catkin_LIBRARIES}
+        )
 #############
 ## Install ##
 #############
@@ -207,3 +215,4 @@ target_link_libraries(cmd_transfer
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+roslint_cpp()
