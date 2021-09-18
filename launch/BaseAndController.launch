@@ -1,4 +1,6 @@
 <launch>
-    <include file="$(find chassis_base)/launch/Hub_Motor_base.launch"/>
+    <include file="$(find chassis_base)/launch/NiMotion_Motor_base.launch"/>
     <include file="$(find chassis_base)/launch/controller.launch"/>
+    <node pkg="chassis_base" type="lamp_node" name="lamp_node" output="screen"
+          launch-prefix="sudo -E LD_LIBRARY_PATH=$(optenv LD_LIBRARY_PATH)"/>
 </launch>
