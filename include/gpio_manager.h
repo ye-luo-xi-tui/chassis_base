@@ -6,9 +6,14 @@
 #define SRC_CHASSIS_BASE_INCLUDE_GPIO_MANAGER_H_
 
 #include <fcntl.h>
-#include <string>
 #include <map>
 #include <poll.h>
+#include <string>
+
+struct gpio_data {
+public:
+  std::map<int, bool> mappin2data_;
+};
 
 class GpioMangager {
 public:
@@ -17,14 +22,12 @@ public:
   void addInIo(int pin);
   void addOutIo(int pin);
   void writeOutput(int pin, bool IS_HIGH);
-  void readInput();
+  void readInput(struct gpio_data *gpio_data);
 
 private:
-  void ioExport(std::string pin);
-  void ioUnExport(std::string pin);
   void ioDirectionSet(std::string pin, bool IS_OUT);
   std::map<int, int> mapOutputIo_;
-  std::map<int, std::map<int, int *>> mapInputIo_;
+  std::map<int, int> mapInputIo_;
   std::string pin_;
   struct pollfd fds[20]{};
 };

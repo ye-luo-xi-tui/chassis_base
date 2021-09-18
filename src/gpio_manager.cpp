@@ -14,15 +14,11 @@ GpioMangager::~GpioMangager() {
   if (!mapOutputIo_.empty()) {
     for (auto i : mapOutputIo_) {
       close(i.second);
-      ioUnExport(std::to_string(i.first));
     }
   }
   if (!mapInputIo_.empty()) {
     for (auto i : mapInputIo_) {
-      int *ptr = i.second.begin()->second;
-      delete ptr;
-      close(i.second.begin()->first);
-      ioUnExport(std::to_string(i.first));
+      close(i.second);
     }
   }
   mapInputIo_.clear();
@@ -33,7 +29,6 @@ void GpioMangager::addInIo(int pin) {
   int fd;
   pin_ = std::to_string(pin);
 
-  ioExport(pin_);
   ioDirectionSet(pin_, false);
 
   std::string file = "/sys/class/gpio/gpio" + pin_ + "/value";
@@ -41,16 +36,13 @@ void GpioMangager::addInIo(int pin) {
   if (fd == -1) {
     ROS_ERROR("[gpio]Unable to open /sys/class/gpio/gpio%i/value", pin);
   }
-  std::map<int, int *> mapfd2data;
-  mapfd2data.insert(std::make_pair(fd, new int));
-  mapInputIo_.insert(std::make_pair(pin, mapfd2data));
+  mapInputIo_.insert(std::make_pair(pin, fd));
 }
 
 void GpioMangager::addOutIo(int pin) {
   int fd;
   pin_ = std::to_string(pin);
 
-  ioExport(pin_);
   ioDirectionSet(pin_, true);
 
   std::string file = "/sys/class/gpio/gpio" + pin_ + "/value";
@@ -76,10 +68,10 @@ void GpioMangager::writeOutput(int pin, bool IS_HIGH) {
   }
 }
 
-void GpioMangager::readInput() {
+void GpioMangager::readInput(struct gpio_data *gpio_data) {
   int j = 0;
   for (auto iter : mapInputIo_) {
-    fds[j].fd = iter.second.begin()->first;
+    fds[j].fd = iter.second;
     fds[j].events = POLLPRI;
     j++;
   }
@@ -88,6 +80,7 @@ void GpioMangager::readInput() {
   if (ret == -1) {
     ROS_ERROR("poll failed!\n");
   }
+  std::map<int, int>::iterator it = mapInputIo_.begin();
   for (int i = 0; i < mapInputIo_.size(); i++) {
     if (fds[i].revents & POLLPRI) {
       int gpio_fd = fds[i].fd;
@@ -98,35 +91,10 @@ void GpioMangager::readInput() {
         break;
       }
     }
-    *mapInputIo_[i][fds[i].fd] = (state == 0x31);
+    bool value = (state == 0x31);
+    gpio_data->mappin2data_.insert(std::make_pair(it->first, value));
+    ++it;
   }
-}
-
-void GpioMangager::ioExport(std::string pin) {
-  std::string file = "/sys/class/gpio/export";
-  int fd;
-  fd = open(file.data(), O_WRONLY);
-  if (fd == -1) {
-    ROS_ERROR("[gpio]Unable to open %s", file.data());
-  }
-  lseek(fd, 0, SEEK_SET);
-  if (write(fd, pin.data(), pin.size()) != pin.size()) {
-    ROS_ERROR("[gpio]failed to export gpio%s", pin.data());
-  }
-  close(fd);
-}
-
-void GpioMangager::ioUnExport(std::string pin) {
-  std::string file = "/sys/class/gpio/unexport";
-  int fd;
-  fd = open(file.data(), O_WRONLY);
-  if (fd == -1) {
-    ROS_ERROR("[gpio]Unable to open %s", file.data());
-  }
-  if (write(fd, pin.data(), pin.size()) != pin.size()) {
-    ROS_ERROR("[gpio]failed to export gpio%s", pin.data());
-  }
-  close(fd);
 }
 
 void GpioMangager::ioDirectionSet(std::string pin, bool IS_OUT) {
