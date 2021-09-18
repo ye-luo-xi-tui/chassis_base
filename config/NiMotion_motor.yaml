@@ -48,8 +48,26 @@ defaults:
     "2002sub1": "0"
     "6060": "3"
 nodes:
-  front_left_joint:
+  front_right_joint:
     id: 1
+    pos_to_device: "-rint(pos/(2*pi)*4000)"
+    pos_from_device: "-obj6063*(2*pi)/4000"
+    vel_to_device: "-rint(vel/pi*2000)"
+    vel_from_device: "-obj606C*pi/30"
+  front_left_joint:
+    id: 2
+    pos_to_device: "rint(pos/(2*pi)*4000)"
+    pos_from_device: "obj6063*(2*pi)/4000"
+    vel_to_device: "rint(vel/pi*2000)"
+    vel_from_device: "obj606C*pi/30"
+  back_left_joint:
+    id: 3
+    pos_to_device: "rint(pos/(2*pi)*4000)"
+    pos_from_device: "obj6063*(2*pi)/4000"
+    vel_to_device: "rint(vel/pi*2000)"
+    vel_from_device: "obj606C*pi/30"
+  back_right_joint:
+    id: 4
     pos_to_device: "-rint(pos/(2*pi)*4000)"
     pos_from_device: "-obj6063*(2*pi)/4000"
     vel_to_device: "-rint(vel/pi*2000)"
