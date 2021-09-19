@@ -3,7 +3,6 @@
 //
 
 #include <gpio_manager.h>
-#include <ros/ros.h>
 
 GpioMangager::GpioMangager() {
   mapOutputIo_.clear();
@@ -23,6 +22,34 @@ GpioMangager::~GpioMangager() {
   }
   mapInputIo_.clear();
   mapOutputIo_.clear();
+}
+
+bool GpioMangager::init(ros::NodeHandle module_nh) {
+  XmlRpc::XmlRpcValue xml_rpc_value;
+  if (!module_nh.getParam("gpios", xml_rpc_value))
+    ROS_ERROR("Initialize failed.");
+  for (auto it = xml_rpc_value.begin(); it != xml_rpc_value.end(); ++it) {
+    if (it->second.hasMember("pin")) {
+      if (it->second.hasMember("direction")) {
+        std::string direction = xml_rpc_value[it->first]["direction"];
+        std::string::size_type idx;
+        idx = direction.find("out");
+        if (idx == std::string::npos) {
+          idx = direction.find("in");
+          if (idx == std::string::npos)
+            ROS_ERROR("Module %s hasn't set direction.", it->first.data());
+          else
+            addInIo(xml_rpc_value[it->first]["pin"]);
+        } else
+          addOutIo(xml_rpc_value[it->first]["pin"]);
+      } else {
+        ROS_ERROR("Module %s hasn't set direction.", it->first.data());
+      }
+    } else {
+      ROS_ERROR("Module %s hasn't set pin ID", it->first.data());
+    }
+  }
+  return true;
 }
 
 void GpioMangager::addInIo(int pin) {

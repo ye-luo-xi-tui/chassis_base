@@ -1,0 +1,7 @@
+gpios:
+  front_lamp:
+    pin: 248
+    direction: out
+  back_lamp:
+    pin: 249
+    direction: out

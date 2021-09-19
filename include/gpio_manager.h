@@ -5,9 +5,11 @@
 #ifndef SRC_CHASSIS_BASE_INCLUDE_GPIO_MANAGER_H_
 #define SRC_CHASSIS_BASE_INCLUDE_GPIO_MANAGER_H_
 
+#include <XmlRpcValue.h>
 #include <fcntl.h>
 #include <map>
 #include <poll.h>
+#include <ros/ros.h>
 #include <string>
 
 struct gpio_data {
@@ -19,12 +21,13 @@ class GpioMangager {
 public:
   explicit GpioMangager();
   ~GpioMangager();
-  void addInIo(int pin);
-  void addOutIo(int pin);
+  bool init(ros::NodeHandle module_nh);
   void writeOutput(int pin, bool IS_HIGH);
   void readInput(struct gpio_data *gpio_data);
 
 private:
+  void addInIo(int pin);
+  void addOutIo(int pin);
   void ioDirectionSet(std::string pin, bool IS_OUT);
   std::map<int, int> mapOutputIo_;
   std::map<int, int> mapInputIo_;
