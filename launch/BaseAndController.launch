@@ -1,4 +1,7 @@
 <launch>
-    <include file="$(find chassis_base)/launch/NiMotion_Motor_base.launch"/>
-    <include file="$(find chassis_base)/launch/controller.launch"/>
+    <!--    <include file="$(find chassis_base)/launch/NiMotion_Motor_base.launch"/>-->
+    <!--    <include file="$(find chassis_base)/launch/controller.launch"/>-->
+    <node pkg="chassis_base" type="lamp_node" name="lamp_node" output="screen">
+        <rosparam command="load" file="$(find chassis_base)/config/Lamp.yaml"/>
+    </node>
 </launch>
