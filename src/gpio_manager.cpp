@@ -95,7 +95,8 @@ void GpioMangager::writeOutput(int pin, bool IS_HIGH) {
   }
 }
 
-void GpioMangager::readInput(struct GpioDataStamp *gpio_data_stamp) {
+void GpioMangager::readInput(
+    std::vector<GpioDataStamp> &gpio_data_stamp_vector) {
   int j = 0;
   for (auto iter : mapInputIo_) {
     fds[j].fd = iter.second;
@@ -108,6 +109,7 @@ void GpioMangager::readInput(struct GpioDataStamp *gpio_data_stamp) {
     ROS_ERROR("poll failed!\n");
   }
   std::map<int, int>::iterator it = mapInputIo_.begin();
+  std::vector<GpioDataStamp>::iterator iter = gpio_data_stamp_vector.begin();
   for (int i = 0; i < mapInputIo_.size(); i++) {
     if (fds[i].revents & POLLPRI) {
       int gpio_fd = fds[i].fd;
@@ -119,10 +121,13 @@ void GpioMangager::readInput(struct GpioDataStamp *gpio_data_stamp) {
       }
     }
     bool value = (state == 0x31);
-    gpio_data_stamp->data.pin = it->first;
-    gpio_data_stamp->data.value = value;
-    gpio_data_stamp->stamp = ros::Time::now();
+    GpioDataStamp gpio_data_stamp;
+    gpio_data_stamp.data.pin = it->first;
+    gpio_data_stamp.data.value = value;
+    gpio_data_stamp.stamp = ros::Time::now();
+    gpio_data_stamp_vector.push_back(gpio_data_stamp);
     ++it;
+    ++iter;
   }
 }
 

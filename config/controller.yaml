@@ -21,8 +21,8 @@ controllers:
     wheel_separation_multiplier: 1.0
     wheel_radius_multiplier: 1.0
     base_frame_id: base_link
-    wheel_separation: 0.593
-    wheel_radius: 0.1265
+    wheel_separation: 0.674
+    wheel_radius: 0.165
     linear:
       x:
         has_velocity_limits: true
