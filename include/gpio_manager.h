@@ -13,8 +13,13 @@
 #include <string>
 
 struct gpio_data {
-public:
-  std::map<int, bool> mappin2data_;
+  int pin;
+  int value;
+};
+
+struct GpioDataStamp {
+  gpio_data data{};
+  ros::Time stamp;
 };
 
 class GpioMangager {
@@ -23,7 +28,7 @@ public:
   ~GpioMangager();
   bool init(ros::NodeHandle module_nh);
   void writeOutput(int pin, bool IS_HIGH);
-  void readInput(struct gpio_data *gpio_data);
+  void readInput(struct GpioDataStamp *gpio_data_stamp);
 
 private:
   void addInIo(int pin);

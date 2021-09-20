@@ -95,7 +95,7 @@ void GpioMangager::writeOutput(int pin, bool IS_HIGH) {
   }
 }
 
-void GpioMangager::readInput(struct gpio_data *gpio_data) {
+void GpioMangager::readInput(struct GpioDataStamp *gpio_data_stamp) {
   int j = 0;
   for (auto iter : mapInputIo_) {
     fds[j].fd = iter.second;
@@ -119,7 +119,9 @@ void GpioMangager::readInput(struct gpio_data *gpio_data) {
       }
     }
     bool value = (state == 0x31);
-    gpio_data->mappin2data_.insert(std::make_pair(it->first, value));
+    gpio_data_stamp->data.pin = it->first;
+    gpio_data_stamp->data.value = value;
+    gpio_data_stamp->stamp = ros::Time::now();
     ++it;
   }
 }
