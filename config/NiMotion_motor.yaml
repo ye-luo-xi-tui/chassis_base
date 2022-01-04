@@ -13,7 +13,7 @@ sync:
 # struct syntax
 defaults:
   eds_pkg: chassis_base # optionals package  name for relative path
-  eds_file: "config/NiMotion_stm57.eds" # path to EDS/DCF file
+  eds_file: "config/PMM6040.eds" # path to EDS/DCF file
   motor_allocator: canopen::Motor402::Allocator # select allocator for motor layer
   motor_layer: # settings passed to motor layer (plugin-specific)
     switching_state: 5 # (Operation_Enable), state for mode switching
@@ -50,26 +50,26 @@ defaults:
 nodes:
   front_right_joint:
     id: 1
-    pos_to_device: "-rint(pos/(2*pi)*4000)"
-    pos_from_device: "-obj6063*(2*pi)/4000"
-    vel_to_device: "-rint(vel/pi*2000)"
+    pos_to_device: "-rint(pos/(2*pi)*4096)"
+    pos_from_device: "-obj6064*(2*pi)/4096"
+    vel_to_device: "-rint(vel/pi*30)"
     vel_from_device: "-obj606C*pi/30"
   front_left_joint:
     id: 2
-    pos_to_device: "rint(pos/(2*pi)*4000)"
-    pos_from_device: "obj6063*(2*pi)/4000"
-    vel_to_device: "rint(vel/pi*2000)"
-    vel_from_device: "obj606C*pi/30"
+    pos_to_device: "-rint(pos/(2*pi)*4096)"
+    pos_from_device: "-obj6064*(2*pi)/4096"
+    vel_to_device: "-rint(vel/pi*30)"
+    vel_from_device: "-obj606C*pi/30"
   back_left_joint:
     id: 3
-    pos_to_device: "rint(pos/(2*pi)*4000)"
-    pos_from_device: "obj6063*(2*pi)/4000"
-    vel_to_device: "rint(vel/pi*2000)"
-    vel_from_device: "obj606C*pi/30"
+    pos_to_device: "-rint(pos/(2*pi)*4096)"
+    pos_from_device: "-obj6064*(2*pi)/4096"
+    vel_to_device: "-rint(vel/pi*30)"
+    vel_from_device: "-obj606C*pi/30"
   back_right_joint:
     id: 4
-    pos_to_device: "-rint(pos/(2*pi)*4000)"
-    pos_from_device: "-obj6063*(2*pi)/4000"
-    vel_to_device: "-rint(vel/pi*2000)"
+    pos_to_device: "-rint(pos/(2*pi)*4096)"
+    pos_from_device: "-obj6064*(2*pi)/4096"
+    vel_to_device: "-rint(vel/pi*30)"
     vel_from_device: "-obj606C*pi/30"
 # list syntax
