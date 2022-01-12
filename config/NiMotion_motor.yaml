@@ -50,26 +50,26 @@ defaults:
 nodes:
   front_right_joint:
     id: 1
-    pos_to_device: "-rint(pos/(2*pi)*4096)"
-    pos_from_device: "-obj6064*(2*pi)/4096"
-    vel_to_device: "-rint(vel/pi*30)"
-    vel_from_device: "-obj606C*pi/30"
+    pos_to_device: "rint(pos/(2*pi)*10000)"
+    pos_from_device: "obj6064*(2*pi)/10000"
+    vel_to_device: "rint(vel/pi*5000)"
+    vel_from_device: "obj6069*pi/5000"
   front_left_joint:
     id: 2
-    pos_to_device: "-rint(pos/(2*pi)*4096)"
-    pos_from_device: "-obj6064*(2*pi)/4096"
-    vel_to_device: "-rint(vel/pi*30)"
-    vel_from_device: "-obj606C*pi/30"
+    pos_to_device: "-rint(pos/(2*pi)*10000)"
+    pos_from_device: "-obj6064*(2*pi)/10000"
+    vel_to_device: "-rint(vel/pi*5000)"
+    vel_from_device: "-obj6069*pi/5000"
   back_left_joint:
     id: 3
-    pos_to_device: "-rint(pos/(2*pi)*4096)"
-    pos_from_device: "-obj6064*(2*pi)/4096"
-    vel_to_device: "-rint(vel/pi*30)"
-    vel_from_device: "-obj606C*pi/30"
+    pos_to_device: "-rint(pos/(2*pi)*10000)"
+    pos_from_device: "-obj6064*(2*pi)/10000"
+    vel_to_device: "-rint(vel/pi*5000)"
+    vel_from_device: "-obj6069*pi/5000"
   back_right_joint:
     id: 4
-    pos_to_device: "-rint(pos/(2*pi)*4096)"
-    pos_from_device: "-obj6064*(2*pi)/4096"
-    vel_to_device: "-rint(vel/pi*30)"
-    vel_from_device: "-obj606C*pi/30"
+    pos_to_device: "rint(pos/(2*pi)*10000)"
+    pos_from_device: "obj6064*(2*pi)/10000"
+    vel_to_device: "rint(vel/pi*5000)"
+    vel_from_device: "obj6069*pi/5000"
 # list syntax
