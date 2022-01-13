@@ -5,5 +5,5 @@ controllers:
   
   joint_velocity_controller:
     type: velocity_controllers/JointVelocityController
-    joint: "front_left_joint"
+    joint: "front_right_joint"
     required_drive_mode: 3
